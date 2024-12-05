@@ -1,0 +1,4 @@
+*.dll
+*pub
+TechTaskCar/obj
+TechTaskCar/bin
