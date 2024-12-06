@@ -1,6 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using TechTaskCar.Models;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+
+builder.Services.AddDbContext<TechTaskDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -19,6 +29,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Ensure database is created
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TechTaskDbContext>();
+    dbContext.Database.EnsureCreated(); // Creates the database if it does not exist
+}
+
+
 
 app.MapControllerRoute(
     name: "default",
