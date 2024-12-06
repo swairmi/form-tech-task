@@ -36,9 +36,7 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<TechTaskDbContext>();
     dbContext.Database.EnsureCreated(); // Creates the database if it does not exist
 }
-
-
-
+  
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
