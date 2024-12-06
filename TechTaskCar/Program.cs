@@ -6,7 +6,7 @@ using TechTaskCar.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
+// uses the builder to be abler to use my models property 
 builder.Services.AddDbContext<TechTaskDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
